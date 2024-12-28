@@ -1,1 +1,1 @@
-web ödevi web programlama dersi için yapıldı  
+web ödevi web programlama dersi için yapıldı  bu proje kuafor uygulamasıdır 
