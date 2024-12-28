@@ -1,0 +1,56 @@
+﻿@model IEnumerable<KuaforWeb.Models.Salon>
+
+@{
+    ViewData["Title"] = "Salons";
+}
+<style>
+
+    .bottun2 {
+        background-color: #4169E1;
+    }
+</style>
+<h1 class="text-center">Salons</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.NumberOfRows)</th>
+            <th>@Html.DisplayNameFor(model => model.SeatsPerRow)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumberOfRows)</td>
+                <td>@Html.DisplayFor(modelItem => item.SeatsPerRow)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('Are you sure you want to delete this?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-link p-0 m-0 d-inline">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+
+
+<p>
+    <a asp-action="Create" class="btn bottun2 text-white">Create New Salon</a>
+</p>

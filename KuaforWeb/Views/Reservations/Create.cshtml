@@ -1,0 +1,45 @@
+﻿@model KuaforWeb.Models.Reservation
+
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h1>Create Reservation</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="RandevuId" class="control-label">Randevu</label>
+                <select asp-for="RandevuId" class="form-control" asp-items="ViewBag.RandevuId">
+                    <option value="">Select a Randevu</option>
+                </select>
+                <span asp-validation-for="RandevuId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SeatId" class="control-label">Seat</label>
+                <select asp-for="SeatId" class="form-control" asp-items="ViewBag.SeatId">
+                    <option value="">Select a seat</option>
+                </select>
+                <span asp-validation-for="SeatId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

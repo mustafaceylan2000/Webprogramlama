@@ -1,0 +1,55 @@
+﻿@model IEnumerable<KuaforWeb.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Booked Tickets</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Randevu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seat)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Name)
+                </td>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.Flight.Destination)
+                </td> *@
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.Seat.Class)
+                </td> *@
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

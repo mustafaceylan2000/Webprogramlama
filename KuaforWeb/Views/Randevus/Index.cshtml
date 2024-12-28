@@ -1,0 +1,67 @@
+﻿@model IEnumerable<KuaforWeb.Models.Randevu>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Randevus";
+    var isAdmin = User.IsInRole("Admin");
+}
+<style>
+    .custom-btn {
+        background-color: orangered;
+        border-color: grey;
+        color: white;
+    }
+
+    .card2 {
+        padding-left: 20px;
+        padding-right: 20px;
+        box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
+        background-color: #FFFFF0;
+    }
+
+    .bottun2 {
+        background-color: #4169E1;
+    }
+</style>
+<h1 class="text-center">Available Randevus</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card  mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 fw-normal">@item.RandevuNumber</h4>
+                </div>
+                <div class="card-body card2">
+                    <p class="card-text ">StartTime: @item.StartTime.ToString("g")</p>
+                    <p class="card-text ">FinishTime: @item.FinishTime.ToString("g")</p>
+                    @* <p class="card-text ">Duration: @item.FlightDuration.ToString()</p> *@
+                   @*  <p class="card-text ">From: @item.Origin</p>
+                    <p class="card-text ">To: @item.Destination</p> *@
+                    <p class="card-text ">Price: @item.Price.ToString("C")</p>
+                    <p class="card-text ">Status: @item.RandevuStatus</p>
+                    <p class="card-text ">Salon: @item.Salon?.Name</p>
+
+                    <div class="d-flex justify-content-around align-items-center">
+
+                        <form asp-controller="Reservations" asp-action="Create" method="get" class="m-0">
+                            <input type="hidden" name="randevuId" value="@item.Id" />
+                            <button type="submit" class="btn btn-primary">Make Reservation</button>
+                        </form>
+
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn bottun2 text-white">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (isAdmin)
+    {
+        <div class="mb-3">
+            <a asp-action="Create" class="btn custom-btn">Create New Randevu</a>
+        </div>
+    }
+</div>
